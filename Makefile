@@ -31,11 +31,10 @@ jenkins-down:
 	cd k8s-jenkins && kubectl delete jenkins.helm.yaml
 admin:
 	kubectl create -n jenkins clusterrolebinding jenkins-account --clusterrole=cluster-admin --serviceaccount=jenkins:jenkins 
-elf: 
-	elf-clone elf-up elf-test 
-
+user: 
+	kubectl create -n omegaa clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
 elf-clone:
-	https://github.com/FatimahAlObaidan/elastic.git
+	git clone https://github.com/FatimahAlObaidan/elastic
 elf-up:
 	cd elf && ./elf.sh
 
