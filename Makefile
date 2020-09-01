@@ -31,8 +31,10 @@ jenkins-down:
 	cd k8s-jenkins && kubectl delete jenkins.helm.yaml
 admin:
 	kubectl create -n jenkins clusterrolebinding jenkins-account --clusterrole=cluster-admin --serviceaccount=jenkins:jenkins 
-user: 
-	kubectl create -n omegaa clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
+omega: 
+	kubectl create -n omega clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:default
+monitor: 
+	kubectl create -n monitor clusterrolebinding monitor --clusterrole cluster-admin --serviceaccount=jenkins:default
 elf-clone:
 	git clone https://github.com/FatimahAlObaidan/elastic
 elf-up:
@@ -41,8 +43,6 @@ elf-up:
 elf-test:
 	curl localhost/elf
 
-elf-tidy:
-	rm -rf elf
 
 elf-down:
 	helm uninstall elasticsearch --namespace=elf
@@ -50,10 +50,11 @@ elf-down:
 	helm uninstall kibana --namespace=elf
 	kubectl delete random-logger -n elf
 
-pro-graf: pro-graf-clone pro-graf-up pro-graf-test pro-graf-tidy
+pro-graf: 
+	pro-graf-clone pro-graf-up pro-graf-test pro-graf-tidy
 
 pro-graf-clone:
-	git clone https://github.com/KnowledgeHut-AWS/pro-graf
+	https://github.com/FatimahAlObaidan/grafana.git
 
 pro-graf-up:
 	cd pro-graf && ./pro-graf.sh
